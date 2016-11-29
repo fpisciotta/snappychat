@@ -15,7 +15,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 ## Endpoints
 
 	
-	- `GET http://yourexample.com/api/users`
+- `GET http://yourexample.com/api/users`
 	
 	#Response
 		
