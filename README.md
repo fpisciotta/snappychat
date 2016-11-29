@@ -17,7 +17,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 	- ``` GET http://yourexample.com/api/users ```
 	
-		#Response
+	#Response
 		
 		Status: 200 OK |
 		-------------- |
