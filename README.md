@@ -158,6 +158,11 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 		user_id : "unique user identifier, email must be used"
 		
+		{
+			nick_name: "jhony1",
+			age: 20
+		}
+		
 	####Example 
 	#####Request
 	```javascript
@@ -201,7 +206,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		
 		{
 			email: { type: String, required : true},
-			message: email: { type: String}
+			message: { type: String}
 		}
 		
 	####Example 
