@@ -21,7 +21,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		
 	Status: 200 OK |
 	-------------- |
-	`[
+	```javascript
+	[
 	  {
 		"_id": "583a7db452dbee2c104b5ac2",
 		"nick_name": "grinchss",
@@ -48,7 +49,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		  "first": "Juan",
 		  "last": "Gonzalez"
 		}
-	  }]`
+	  }]```
 		
 	
 
