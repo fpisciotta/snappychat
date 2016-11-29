@@ -199,12 +199,10 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 		user_id : "unique user identifier, email must be used"
 		
-		```javascript
 		{
 			email: { type: String, required : true},
 			message: email: { type: String}
 		}
-		```
 		
 	####Example 
 	#####Request
@@ -280,11 +278,10 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 		user_id : "unique user identifier, email must be used"
 		
-		```javascript
 		{
 			email: { type: String, required : true}
 		}
-		```
+
 	####Example 
 	#####Request
 	```javascript
@@ -310,12 +307,11 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 		user_id : "unique user identifier, email must be used"
 
-		```javascript
 		{
 			email: { type: String, required : true},
 			accept: { type: Boolean, required : true}
 		}
-		```
+
 	####Example 
 	#####Request
 	```javascript
@@ -436,11 +432,10 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 		user_id : "unique user identifier, email must be used"
 		
-		```javascript
 		{
 			email: { type: String, required : true} //friend's email
 		}
-		```
+
 	####Example 
 	#####Request
 	```javascript
@@ -467,11 +462,10 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 		user_id : "unique user identifier, email must be used"
 		
-		```javascript
 		{
 			comment: { type: String, required : true}
 		}
-		```
+
 	####Example 
 	#####Request
 	```javascript
