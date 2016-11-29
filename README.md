@@ -18,7 +18,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 
 #### Create user
 	  
-- `POST http://yourexample.com/api/users`
+- `POST https://snappychatapi.herokuapp.com/api/users`
 	####Params
 	```javascript
 	{
@@ -75,7 +75,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 
 #### Get users
 	
-- `GET http://yourexample.com/api/users`
+- `GET https://snappychatapi.herokuapp.com/api/users`
 	
 	#####Response
 		
@@ -114,7 +114,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 
 #### Get user
 	  
-- `GET http://yourexample.com/api/users/:user_id`
+- `GET https://snappychatapi.herokuapp.com/api/users/:user_id`
 
 	####Params
 	
@@ -152,7 +152,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 
 #### Update user
 	  
-- `PUT http://yourexample.com/api/users/:user_id`
+- `PUT https://snappychatapi.herokuapp.com/api/users/:user_id`
 	
 	####Params
 	
@@ -179,7 +179,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 #### Delete user
 	  
-- `DELETE http://yourexample.com/api/users/:user_id`
+- `DELETE https://snappychatapi.herokuapp.com/api/users/:user_id`
 	
 	####Params
 	
@@ -198,7 +198,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 
 #### Send friend request
 	
-- `POST http://yourexample.com/api/users/:user_id/friends_request`
+- `POST https://snappychatapi.herokuapp.com/api/users/:user_id/friends_request`
 
 	####Params
 	
@@ -229,7 +229,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	  ```
 #### Get user profile and friends request list
 	  
-- `GET http://yourexample.com/api/users/:user_id/friends_request`
+- `GET https://snappychatapi.herokuapp.com/api/users/:user_id/friends_request`
 
 	####Params
 	
@@ -277,7 +277,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	  ```
 #### Delete friend request
 	  
-- `DELETE http://yourexample.com/api/users/:user_id/friends_request`
+- `DELETE https://snappychatapi.herokuapp.com/api/users/:user_id/friends_request`
 	
 	####Params
 	
@@ -306,7 +306,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	  ```
 #### Accept or reject friends pending
 	
-- `POST http://yourexample.com/api/users/:user_id/friends_pending`
+- `POST https://snappychatapi.herokuapp.com/api/users/:user_id/friends_pending`
 	
 	####Params
 	
@@ -337,7 +337,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	  ```
 #### Get user profile and friends pending list
 	  
-- `GET http://yourexample.com/api/users/:user_id/friends_pending`
+- `GET https://snappychatapi.herokuapp.com/api/users/:user_id/friends_pending`
 	
 	####Params
 
@@ -386,7 +386,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 
 #### Get user profile and friends list
 	  
-- `GET http://yourexample.com/api/users/:user_id/friends`
+- `GET https://snappychatapi.herokuapp.com/api/users/:user_id/friends`
 	
 	####Params
 	
@@ -431,7 +431,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	```	  
 #### Delete a friend
 	  
-- `DELETE http://yourexample.com/api/users/:user_id/friends`
+- `DELETE https://snappychatapi.herokuapp.com/api/users/:user_id/friends`
 	
 	####Params
 	
@@ -461,7 +461,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 
 #### Add a timeline
 	  
-- `POST http://yourexample.com/api/users/:user_id/timeline`
+- `POST https://snappychatapi.herokuapp.com/api/users/:user_id/timeline`
 	
 	####Params
 	
@@ -491,7 +491,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 #### Get user profile and timeline
 
 	  
-- `GET http://yourexample.com/api/users/:user_id/timeline`
+- `GET https://snappychatapi.herokuapp.com/api/users/:user_id/timeline`
 
 	####Params
 	
@@ -535,7 +535,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 #### Get a timeline
 	
 	  
-- `GET http://yourexample.com/api/users/:user_id/timeline/:timeline_id`
+- `GET https://snappychatapi.herokuapp.com/api/users/:user_id/timeline/:timeline_id`
 	
 	####Params
 	
@@ -571,7 +571,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	 ```
 #### Delete a timeline
 	
-- `DELETE http://yourexample.com/api/users/:user_id/timeline/:timeline_id`
+- `DELETE https://snappychatapi.herokuapp.com/api/users/:user_id/timeline/:timeline_id`
 	
 	####Params
 	
