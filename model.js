@@ -44,7 +44,7 @@ exports.getUserProfileAndFriends = function (req, callback){
 exports.getUserProfileAndFriendsRequest = function (req, callback){
 	//console.log("User id: ",req.params.user_id);
 	User.find({'email': req.params.user_id}).select('-friends_pending -friends -timeline')
-	.populate({path: 'timeline', options: { sort: { 'creationDate': -1 } } }).exec(function(err, user) {
+	.populate('friends_requested.user_id','name email nick_name -_id').exec(function(err, user) {
 		callback(err,user);
 	});
 	
@@ -53,7 +53,7 @@ exports.getUserProfileAndFriendsRequest = function (req, callback){
 exports.getUserProfileAndFriendsPending = function (req, callback){
 	//console.log("User id: ",req.params.user_id);
 	User.find({'email': req.params.user_id}).select('-friends_requested -friends -timeline')
-	.populate({path: 'timeline', options: { sort: { 'creationDate': -1 } } }).exec(function(err, user) {
+	.populate('friends_pending.user_id','name email nick_name -_id').exec(function(err, user) {
 		callback(err,user);
 	});
 	

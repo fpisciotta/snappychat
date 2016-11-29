@@ -62,17 +62,17 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	####Request
 	```javascript
 	{
- 	"nick_name": "jhony",
-    "email": "jhonyh@gmail.com",
-    "password" : "safsfsffs",
-    "age": 18,
-    "notification": true, 
-    "visibility": "friends-only",
-    "status": false,
-    "name": {
-      "first": "Jhon",
-      "last": "Peters"
-    }
+		"nick_name": "jhony",
+		"email": "jhonyh@gmail.com",
+		"password" : "safsfsffs",
+		"age": 18,
+		"notification": true, 
+		"visibility": "friends-only",
+		"status": false,
+		"name": {
+		  "first": "Jhon",
+		  "last": "Peters"
+		}
 	}
 	```
 	
@@ -134,6 +134,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	####Response
 		
 	Status: 204 NO CONTENT |
+	-------------- |
 	
 #### Delete user
 	  
@@ -156,8 +157,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	####Request
 	```javascript
 	{
-    "email": "jhonyh@gmail.com",
-    "message": "Hello, I'd would like to be your friend"
+		"email": "jhonyh@gmail.com",
+		"message": "Hello, I'd would like to be your friend"
 	}
 	```
 	
@@ -185,11 +186,18 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		"nick_name": "grinchss",
 		"email": "grinch@gmail.com",
 		"age": 10,
-		"__v": 4,
+		"__v": 5,
 		"friends_requested": [
 		  {
 			"message": "Hello, I'd like to be your friend",
-			"user_id": "583dfb71c4747e39682bae94",
+			"user_id": {
+			  "nick_name": "jhony",
+			  "email": "jhonyh@gmail.com",
+			  "name": {
+				"first": "Jhon",
+				"last": "Peters"
+			  }
+			},
 			"_id": "583dffc8c4747e39682bae95",
 			"creationDate": "2016-11-29T22:23:04.146Z"
 		  }
@@ -233,8 +241,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	####Request
 	```javascript
 	{
-    "email": "grinch@gmail.com",
-    "accept": true
+		"email": "grinch@gmail.com",
+		"accept": true
 	}
 	```
 	
@@ -267,7 +275,14 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		  {
 			"_id": "583dffc8c4747e39682bae96",
 			"message": "Hello, I'd like to be your friend",
-			"user_id": "583a7db452dbee2c104b5ac2",
+			"user_id": {
+			  "nick_name": "grinchss",
+			  "email": "grinch@gmail.com",
+			  "name": {
+				"first": "Juan",
+				"last": "Gonzalez"
+			  }
+			},
 			"creationDate": "2016-11-29T22:23:04.247Z"
 		  }
 		],
@@ -283,6 +298,68 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	  }
 	]
 	  ```
+
+#### Get user profile and friends list
+	  
+- `GET http://yourexample.com/api/users/:user_id/friends`
+	
+	####Response
+		
+	Status: 200 OK |
+	-------------- |
+	```javascript
+	[
+	  {
+		"_id": "583a7db452dbee2c104b5ac2",
+		"nick_name": "grinchss",
+		"email": "grinch@gmail.com",
+		"age": 10,
+		"__v": 5,
+		"friends_requested": [],
+		"friends_pending": [],
+		"friends": [
+		  {
+			"nick_name": "grinch",
+			"email": "grinch3@gmail.com",
+			"name": {
+			  "first": "Juan",
+			  "last": "Gonzalez"
+			}
+		  }
+		],
+		"update_date": "2016-11-27T06:31:16.589Z",
+		"creation_date": "2016-11-27T06:31:16.589Z",
+		"notification": true,
+		"visibility": "friends-only",
+		"status": false,
+		"name": {
+		  "first": "Juan",
+		  "last": "Gonzalez"
+		}
+	  }
+	]
+	```	  
+#### Delete a friend
+	  
+- `DELETE http://yourexample.com/api/users/:user_id/friends`
+	
+	####Request
+	```javascript
+	{
+		"email": "grinch3@gmail.com",
+	}
+	```
+	
+	####Response
+		
+	Status: 200 OK |
+	-------------- |
+	```javascript
+	{
+		"message": "Friend deleted!"
+	}
+	  ```
+
 #### Add a timeline
 	  
 - `POST http://yourexample.com/api/users/:user_id/timeline`
