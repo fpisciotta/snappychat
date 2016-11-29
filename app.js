@@ -75,7 +75,7 @@ router.route('/users/:user_id')
 			if (err)
                 res.status(500).send(err);
 			else
-				res.status(200).json({ message: 'Successfully deleted' });
+				res.status(200).json({ message: 'User deleted' });
 		});
     });
 	
