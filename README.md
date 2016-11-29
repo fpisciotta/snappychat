@@ -77,7 +77,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 - `GET http://yourexample.com/api/users`
 	
-	####Response
+	#####Response
 		
 	Status: 200 OK |
 	-------------- |
@@ -121,8 +121,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		```
 		user_id : "unique user identifier, email must be used"
 		```
-	
-	####Response
+	####Example 
+	#####Response
 		
 	Status: 200 OK |
 	-------------- |
@@ -160,14 +160,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		```
 		user_id : "unique user identifier, email must be used"
 		```
-	
-	####Params
-	
-		```
-		user_id : "unique user identifier, email must be used"
-		```
-	
-	####Request
+	####Example 
+	#####Request
 	```javascript
 	{
 		"nick_name": "jhony1",
@@ -175,7 +169,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	}
 	```
 	
-	####Response
+	#####Response
 		
 	Status: 204 NO CONTENT |
 	-------------- |
@@ -189,8 +183,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		```
 		user_id : "unique user identifier, email must be used"
 		```
-	
-	####Response
+	####Example 
+	#####Response
 		
 	Status: 200 OK |
 	-------------- |
@@ -217,8 +211,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		}
 		```
 		
-	
-	####Request
+	####Example 
+	#####Request
 	```javascript
 	{
 		"email": "jhonyh@gmail.com",
@@ -226,7 +220,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	}
 	```
 	
-	####Response
+	#####Response
 		
 	Status: 201 CREATED |
 	-------------- |
@@ -244,8 +238,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		```
 		user_id : "unique user identifier, email must be used"
 		```
-	
-	####Response
+	####Example 
+	#####Response
 		
 	Status: 200 OK |
 	-------------- |
@@ -299,15 +293,15 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 			email: { type: String, required : true}
 		}
 		```
-	
-	####Request
+	####Example 
+	#####Request
 	```javascript
 	{
 		"email": "jhonyh@gmail.com",
 	}
 	```
 	
-	####Response
+	#####Response
 		
 	Status: 200 OK |
 	-------------- |
@@ -332,8 +326,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 			accept: { type: Boolean, required : true}
 		}
 		```
-	
-	####Request
+	####Example 
+	#####Request
 	```javascript
 	{
 		"email": "grinch@gmail.com",
@@ -341,7 +335,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	}
 	```
 	
-	####Response
+	#####Response
 		
 	Status: 201 CREATED |
 	-------------- |
@@ -359,8 +353,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		```
 		user_id : "unique user identifier, email must be used"
 		```
-		
-	####Response
+	####Example 	
+	#####Response
 		
 	Status: 200 OK |
 	-------------- |
@@ -409,8 +403,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		```
 		user_id : "unique user identifier, email must be used"
 		```
-	
-	####Response
+	####Example 
+	#####Response
 		
 	Status: 200 OK |
 	-------------- |
@@ -461,15 +455,15 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 			email: { type: String, required : true} //friend's email
 		}
 		```
-	
-	####Request
+	####Example 
+	#####Request
 	```javascript
 	{
 		"email": "grinch3@gmail.com",
 	}
 	```
 	
-	####Response
+	#####Response
 		
 	Status: 200 OK |
 	-------------- |
@@ -494,15 +488,15 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 			comment: { type: String, required : true}
 		}
 		```
-	
-	####Request
+	####Example 
+	#####Request
 	```javascript
 	{
 		"comment" : "this is a commment"
 	}
 	```
 	
-	####Response
+	#####Response
 		
 	Status: 201 CREATED |
 	-------------- |
@@ -521,8 +515,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		```
 		user_id : "unique user identifier, email must be used"
 		```
-		
-	####Response
+	####Example 
+	#####Response
 		
 	Status: 200 OK |
 	-------------- |
@@ -558,15 +552,16 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 
 #### Get a timeline
 	
+	  
+- `GET http://yourexample.com/api/users/:user_id/timeline/:timeline_id`
+	
 	####Params
 	
 		```
 		timeline_id : "unique timeline identifier"
 		```
-	  
-- `GET http://yourexample.com/api/users/:user_id/timeline/:timeline_id`
-	
-	####Response
+	####Example
+	#####Response
 		
 	Status: 200 OK |
 	-------------- |
@@ -595,12 +590,6 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	 ```
 #### Delete a timeline
 	
-	####Params
-	
-		```
-		timeline_id : "unique timeline identifier"
-		```
-	  
 - `DELETE http://yourexample.com/api/users/:user_id/timeline/:timeline_id`
 	
 	####Params
@@ -608,8 +597,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		```
 		timeline_id : "unique timeline identifier"
 		```
-	
-	####Response
+	####Example
+	#####Response
 		
 	Status: 200 OK |
 	-------------- |
