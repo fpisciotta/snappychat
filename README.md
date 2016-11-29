@@ -587,4 +587,3 @@ To deploy [the app](https://snappychatapi.herokuapp.com/) to Heroku you can use 
 	}
 	  ```
 	
-	
