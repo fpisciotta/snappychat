@@ -1,15 +1,6 @@
 # SnappyChat API
 
-This API will serve as the back-end of SnappyChat mobile application.
-
-## Deployment
-
-To deploy [the app](https://snappychatapi.herokuapp.com/) to Heroku you can use the Heroku button [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy) or follow these steps:
-
-1. `git clone git://github.com:fpisciotta/snappychatapi.git && cd snappychatapi`
-2. `heroku create`
-3. `git push heroku master`
-4. `heroku open`
+This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of SnappyChat mobile application.
 
 ## Endpoints
 
