@@ -1,6 +1,6 @@
-# hello-mongoose: Using Mongoose.js for elegant MongoDB object modeling in Node.js.  
+# SnappyChat API
 
-MongoDB and Node.js are often used together because of their shared use of Javascript and its Object Notation (JSON).  Mongoose is a popular helper library that provides a more rigorous modeling environment for your data, enforcing a little bit more structure as needed, while still maintaining flexibility that makes MongoDB powerful.  In this article, you make a connection to a hosted MongoDB instance at add-on provider [MongoLab](http://mongolab.com) with Mongoose and model a simple object.  
+This API will serve as the back-end of SnappyChat mobile application.
 
 ## Deployment
 
@@ -12,30 +12,44 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 3. `git push heroku master`
 4. `heroku open`
 
-## Docker
+## Endpoints
 
-The app can be debugged and tested using the [Heroku Docker CLI plugin](https://devcenter.heroku.com/articles/introduction-local-development-with-docker).
+	
+	- ``` GET http://yourexample.com/api/users ```
+	
+		#Response
+		
+		Status: 200 OK |
+		-------------- |
+		```[
+		  {
+			"_id": "583a7db452dbee2c104b5ac2",
+			"nick_name": "grinchss",
+			"email": "grinch@gmail.com",
+			"age": 10,
+			"__v": 4,
+			"friends_requested": [],
+			"friends_pending": [],
+			"timeline": [
+			  "583be1ad7ec7395204265e4a",
+			  "583d285591d80a1058ef5dfa",
+			  "583d289c91d80a1058ef5dfb",
+			  "583d2905612d394608576c58"
+			],
+			"friends": [
+			  "583bb3c3e2bf36179cf78e17"
+			],
+			"update_date": "2016-11-27T06:31:16.589Z",
+			"creation_date": "2016-11-27T06:31:16.589Z",
+			"notification": true,
+			"visibility": "friends-only",
+			"status": false,
+			"name": {
+			  "first": "Juan",
+			  "last": "Gonzalez"
+			}
+		  }]```
+		
+	
 
-Make sure the plugin is installed:
 
-    heroku plugins:install heroku-docker
-
-Configure Docker and Docker Compose:
-
-    heroku docker:init
-
-And run the app locally:
-
-    docker-compose up
-
-The app will now be available on the Docker daemon IP on port 8080.
-
-You can also use Docker to release to Heroku:
-
-    heroku create
-    heroku docker:release
-    heroku open
-
-## License
-
-MIT Licensed
