@@ -156,9 +156,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 	####Params
 	
-		```
 		user_id : "unique user identifier, email must be used"
-		```
+		
 	####Example 
 	#####Request
 	```javascript
@@ -179,9 +178,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 	####Params
 	
-		```
 		user_id : "unique user identifier, email must be used"
-		```
+		
 	####Example 
 	#####Response
 		
@@ -199,9 +197,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 
 	####Params
 	
-		```
 		user_id : "unique user identifier, email must be used"
-		```
 		
 		```javascript
 		{
@@ -234,9 +230,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 
 	####Params
 	
-		```
 		user_id : "unique user identifier, email must be used"
-		```
+		
 	####Example 
 	#####Response
 		
@@ -283,9 +278,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 	####Params
 	
-		```
 		user_id : "unique user identifier, email must be used"
-		```
 		
 		```javascript
 		{
@@ -315,10 +308,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 	####Params
 	
-		```
 		user_id : "unique user identifier, email must be used"
-		```
-		
+
 		```javascript
 		{
 			email: { type: String, required : true},
@@ -348,10 +339,9 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 - `GET http://yourexample.com/api/users/:user_id/friends_pending`
 	
 	####Params
-	
-		```
+
 		user_id : "unique user identifier, email must be used"
-		```
+
 	####Example 	
 	#####Response
 		
@@ -399,9 +389,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 	####Params
 	
-		```
 		user_id : "unique user identifier, email must be used"
-		```
+
 	####Example 
 	#####Response
 		
@@ -445,9 +434,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 	####Params
 	
-		```
 		user_id : "unique user identifier, email must be used"
-		```
 		
 		```javascript
 		{
@@ -478,9 +465,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 	####Params
 	
-		```
 		user_id : "unique user identifier, email must be used"
-		```
 		
 		```javascript
 		{
@@ -511,9 +496,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 
 	####Params
 	
-		`
 		user_id : "unique user identifier, email must be used"
-		`
+		
 	####Example 
 	#####Response
 		
@@ -547,7 +531,7 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 		}
 	  }
 	]
-	  ```
+	```
 
 #### Get a timeline
 	
@@ -556,9 +540,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 	####Params
 	
-		`
 		timeline_id : "unique timeline identifier"
-		`
+
 	####Example
 	#####Response
 		
@@ -593,9 +576,8 @@ To deploy [the app](http://hello-mongoose.herokuapp.com/) to Heroku you can use 
 	
 	####Params
 	
-		```
 		timeline_id : "unique timeline identifier"
-		```
+
 	####Example
 	#####Response
 		
