@@ -121,7 +121,7 @@ router.route('/users/:user_id/timeline/:timeline_id')
 				if (err)
 					res.status(500).send(err);
 				else
-					res.status(201).json({ message: 'Timeline deleted!' });
+					res.status(200).json({ message: 'Timeline deleted!' });
 			});
     })
 
@@ -139,7 +139,7 @@ router.route('/users/:user_id/friends')
 				if (err)
 					res.status(500).send(err);
 				else
-					res.status(201).json({ message: 'Friend deleted!' });
+					res.status(200).json({ message: 'Friend deleted!' });
 			});
     })
 	
@@ -165,7 +165,7 @@ router.route('/users/:user_id/friends_request')
 				if (err)
 					res.status(500).send(err);
 				else
-					res.status(201).json({ message: 'Friend request deleted!' });
+					res.status(200).json({ message: 'Friend request deleted!' });
 			});
     })
 
@@ -223,7 +223,7 @@ router.route('/chats')
 			if(err)
 				res.status(500).send(err);
 			else
-				res.status(201).json({ message: 'Chat deleted!' });
+				res.status(200).json({ message: 'Chat deleted!' });
 		});
         
         
