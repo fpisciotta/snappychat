@@ -40,7 +40,7 @@ var timelineSchema = new mongoose.Schema({
 	user_id : {type: mongoose.Schema.Types.ObjectId, ref : 'User'},
 	comment : {type : String, required : true},
 	creationDate: {type: Date, default: Date.now}
-})
+});
 
 
 

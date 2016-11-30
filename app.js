@@ -2,7 +2,14 @@
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
-var model = require ('./model.js');
+var modelUser = require ('./models/model_user.js');
+var modelChat = require ('./models/model_chat.js');
+
+//Catch uncaughtExceptions
+process.on('uncaughtException', function (err) {
+  console.log(err);
+})
+
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,7 +29,7 @@ router.route('/users')
 
     // create a bear (accessed at POST http://localhost:5000/api/users)
     .post(function(req, res) {
-		model.createUser(req, function (err){
+		modelUser.createUser(req, function (err){
 			if(err)
 				res.status(500).send(err);
 			else
@@ -34,7 +41,7 @@ router.route('/users')
 	
 	.get(function(req, res) {
 		console.log("Get all users");
-		model.getUsers(function(err,users){
+		modelUser.getUsers(function(err,users){
 			if (err)
                 res.status(500).send(err);
 			else if(users == undefined || users == null )
@@ -48,7 +55,7 @@ router.route('/users/:user_id')
 
     // get the bear with that id (accessed at GET http://localhost:5000/api/users/:user_id)
     .get(function(req, res) {
-		model.getUserProfile(req,function(err,user){
+		modelUser.getUserProfile(req,function(err,user){
 			if (err)
                 res.status(500).send(err);
 			else if(user == undefined || user == null  )
@@ -59,7 +66,7 @@ router.route('/users/:user_id')
     })
 	
 	.put(function(req, res) {
-			model.updateUser({email:req.params.user_id},req.body,null,function(err,user){
+			modelUser.updateUser({email:req.params.user_id},req.body,null,function(err,user){
 				//console.log("User: "+JSON.stringify(user));
 				if (err)
 					res.status(500).send(err);
@@ -71,7 +78,7 @@ router.route('/users/:user_id')
     })
 	
 	.delete(function(req, res) {
-		model.removeUser(req,function(err){
+		modelUser.removeUser(req,function(err){
 			if (err)
                 res.status(500).send(err);
 			else
@@ -81,7 +88,7 @@ router.route('/users/:user_id')
 	
 router.route('/users/:user_id/timeline')
 	.post(function(req, res) {
-			model.addTimeline({email:req.params.user_id},req.body,function(err,user){
+			modelUser.addTimeline({email:req.params.user_id},req.body,function(err,user){
 				if (err)
 					res.status(500).send(err);
 				else
@@ -89,7 +96,7 @@ router.route('/users/:user_id/timeline')
 			});
     })
 	.get(function(req, res) {
-		model.getUserProfileAndTimeline(req,function(err,user){
+		modelUser.getUserProfileAndTimeline(req,function(err,user){
 			if (err)
                 res.status(500).send(err);
 			else
@@ -99,7 +106,7 @@ router.route('/users/:user_id/timeline')
 
 router.route('/users/:user_id/timeline/:timeline_id')	
 	.get(function(req, res) {
-		model.getTimeline({_id:req.params.timeline_id},function(err,user){
+		modelUser.getTimeline({_id:req.params.timeline_id},function(err,user){
 			if (err)
                 res.status(500).send(err);
 			else if(user == undefined || user == null  )
@@ -109,7 +116,7 @@ router.route('/users/:user_id/timeline/:timeline_id')
 		});
     })
 	.delete(function(req, res) {
-			model.removeTimeline({_id:req.params.timeline_id},function(err,user){
+			modelUser.removeTimeline({_id:req.params.timeline_id},function(err,user){
 				if (err)
 					res.status(500).send(err);
 				else
@@ -119,7 +126,7 @@ router.route('/users/:user_id/timeline/:timeline_id')
 
 router.route('/users/:user_id/friends')
 	.get(function(req, res) {
-		model.getUserProfileAndFriends(req,function(err,user){
+		modelUser.getUserProfileAndFriends(req,function(err,user){
 			if (err)
 				res.status(500).send(err);
 			else
@@ -127,7 +134,7 @@ router.route('/users/:user_id/friends')
 		});
 	})
 	.delete(function(req, res) {
-			model.removeFriend({email:req.params.user_id},req.body,function(err,user){
+			modelUser.removeFriend({email:req.params.user_id},req.body,function(err,user){
 				if (err)
 					res.status(500).send(err);
 				else
@@ -137,7 +144,7 @@ router.route('/users/:user_id/friends')
 	
 router.route('/users/:user_id/friends_request')
 	.post(function(req, res) {
-			model.addFriendRequest({email:req.params.user_id},req.body,function(err,user){
+			modelUser.addFriendRequest({email:req.params.user_id},req.body,function(err,user){
 				if (err)
 					res.status(500).send(err);
 				else
@@ -145,7 +152,7 @@ router.route('/users/:user_id/friends_request')
 			});
     })
 	.get(function(req, res) {
-		model.getUserProfileAndFriendsRequest(req,function(err,user){
+		modelUser.getUserProfileAndFriendsRequest(req,function(err,user){
 			if (err)
                 res.status(500).send(err);
 			else
@@ -153,7 +160,7 @@ router.route('/users/:user_id/friends_request')
 		});
     })
 	.delete(function(req, res) {
-			model.removeFriendRequest({email:req.params.user_id},req.body,function(err,user){
+			modelUser.removeFriendRequest({email:req.params.user_id},req.body,function(err,user){
 				if (err)
 					res.status(500).send(err);
 				else
@@ -164,7 +171,7 @@ router.route('/users/:user_id/friends_request')
 	
 router.route('/users/:user_id/friends_pending')
 	.post(function(req, res) {
-			model.addFriend({email:req.params.user_id},req.body,function(err,user){
+			modelUser.addFriend({email:req.params.user_id},req.body,function(err,user){
 				if (err)
 					res.status(500).send(err);
 				else
@@ -172,13 +179,56 @@ router.route('/users/:user_id/friends_pending')
 			});
     })
 	.get(function(req, res) {
-		model.getUserProfileAndFriendsPending(req,function(err,user){
+		modelUser.getUserProfileAndFriendsPending(req,function(err,user){
 			if (err)
                 res.status(500).send(err);
 			else
 				res.status(200).json(user);
 		});
     })
+	
+router.route('/chats')
+
+    // create a bear (accessed at POST http://localhost:5000/api/chats)
+    .post(function(req, res) {
+		modelChat.createChatMessage(req.body, function (err){
+			if(err)
+				res.status(500).send(err);
+			else
+				res.status(201).json({ message: 'Chat message created!' });
+		});
+        
+        
+    })
+	
+	.put(function(req, res) {
+			modelChat.updateChat(req.body,null,function(err,chat){
+				//console.log("User: "+JSON.stringify(user));
+				if (err)
+					res.status(500).send(err);
+				else if(chat == undefined || chat == null ){
+					res.status(400).json({ message: 'User not found' })
+				}else
+					res.status(204).send();
+			});
+    })
+
+
+	.get(function(req, res) {
+		var query = {
+			user_sender_id : req.param('user_sender_id'),
+			user_receiver_id : req.param('user_receiver_id')
+		}
+		console.log("Query"+JSON.stringify(query));
+		modelChat.getChatHistory(query,function(err,chat){
+			if (err)
+                res.status(500).send(err);
+			else if(chat == undefined || chat == null )
+					res.status(404).json({ message: 'Chat not found' })
+            else
+				res.status(200).json(chat);
+		});
+    });
 
 // The http server will listen to an appropriate port, or default to
 // port 5000.

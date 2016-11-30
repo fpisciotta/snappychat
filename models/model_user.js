@@ -1,5 +1,5 @@
 
-var userModel = require('./models/user');
+var userModel = require('./user');
 
 var User = userModel.User;
 var Timeline = userModel.Timeline;
