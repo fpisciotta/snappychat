@@ -582,7 +582,7 @@ This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of S
 
 ####Create chat message
 	
-	It creates a chat message and the chat conversation associated to it, if it doesn't exist
+	It adds a chat message to the chat conversation. Also, it creates a chat conversation if it doesn't exist.
 	
 - `POST https://snappychatapi.herokuapp.com/api/chats`
 	
