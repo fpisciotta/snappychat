@@ -577,9 +577,10 @@ This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of S
 		"message": "Timeline deleted!"
 	}
 	  ```
-### Chat resources
+	  
+###Chat resources
 
-#### Create chat message
+####Create chat message
 	
 	It creates a chat message and the chat conversation associated to it, if it doesn't exist
 	
@@ -624,7 +625,7 @@ This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of S
 	####Example
 	
 	#####Request
-		`GET https://snappychatapi.herokuapp.com/api/chats?user_sender_id=grinch@gmail.com&user_receiver_id=grinch3@gmail.com`
+		GET https://snappychatapi.herokuapp.com/api/chats?user_sender_id=grinch@gmail.com&user_receiver_id=grinch3@gmail.com
 	#####Response
 		
 	Status: 200 OK |
