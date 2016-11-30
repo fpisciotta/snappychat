@@ -4,10 +4,11 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var modelUser = require ('./models/model_user.js');
 var modelChat = require ('./models/model_chat.js');
-
+var response;
 //Catch uncaughtExceptions
 process.on('uncaughtException', function (err) {
-  console.log(err);
+  console.log("Exception caught",err);
+  response.status(500).send('Something broke!')
 })
 
 // configure app to use bodyParser()
@@ -27,7 +28,7 @@ router.get('/', function(req, res) {
 
 router.route('/users')
 
-    // create a bear (accessed at POST http://localhost:5000/api/users)
+    // create an user (accessed at POST http://localhost:5000/api/users)
     .post(function(req, res) {
 		modelUser.createUser(req, function (err){
 			if(err)
@@ -189,8 +190,9 @@ router.route('/users/:user_id/friends_pending')
 	
 router.route('/chats')
 
-    // create a bear (accessed at POST http://localhost:5000/api/chats)
+    // create a chat conversation (accessed at POST http://localhost:5000/api/chats)
     .post(function(req, res) {
+		response = res;
 		modelChat.createChatMessage(req.body, function (err){
 			if(err)
 				res.status(500).send(err);
@@ -219,7 +221,6 @@ router.route('/chats')
 			user_sender_id : req.param('user_sender_id'),
 			user_receiver_id : req.param('user_receiver_id')
 		}
-		console.log("Query"+JSON.stringify(query));
 		modelChat.getChatHistory(query,function(err,chat){
 			if (err)
                 res.status(500).send(err);
@@ -228,7 +229,19 @@ router.route('/chats')
             else
 				res.status(200).json(chat);
 		});
+    })
+	.delete(function(req, res) {
+		response = res;
+		modelChat.deleteChat(req.body, function (err){
+			if(err)
+				res.status(500).send(err);
+			else
+				res.status(201).json({ message: 'Chat deleted!' });
+		});
+        
+        
     });
+	
 
 // The http server will listen to an appropriate port, or default to
 // port 5000.

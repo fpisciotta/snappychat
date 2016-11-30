@@ -6,7 +6,7 @@ var chatConversationSchema = new mongoose.Schema({
 	user_creator_id: {type: mongoose.Schema.Types.ObjectId, ref : 'User'},
 	user_receiver_id: {type: mongoose.Schema.Types.ObjectId, ref : 'User'},
 	pending : { type: Boolean, default : false},
-	chat_messages:[{ type: Schema.Types.ObjectId, ref: 'ChatMessage'}]
+	chat_messages:[{ type: mongoose.Schema.Types.ObjectId, ref: 'ChatMessage'}]
 });
 
 var chatMessageSchema = new mongoose.Schema({

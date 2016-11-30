@@ -19,9 +19,31 @@ var createChat = function (query, callback) {
 	});
 }
 
+exports.deleteChat = function (query, callback) {
+	User.find({
+		'email': {$in : [query.user_creator_id,query.user_receiver_id]}
+	}).exec(function (err, users) {
+
+		if (err)
+			return callback(err, null);
+
+		if (users == undefined || users == null || !users.length)
+			return callback(new Error("Users sender not found"), null);
+
+		if (users.length < 2)
+			return callback(new Error("Users not found"), null);
+		
+		Chat.remove({
+			'user_creator_id' : {$in : [users[0]._id,users[1]._id]},
+			'user_receiver_id' : {$in : [users[0]._id,users[1]._id]},
+		}).exec(callback);
+	
+	});
+}
+
 var updateChat = function (query, callback) {
 	User.find({
-		$and: [{email:query.user_sender_id},{email:query.user_receiver_id}]
+		'email': {$in : [query.user_sender_id,query.user_receiver_id]}
 	}).exec(function (err, users) {
 
 		if (err)
@@ -99,6 +121,7 @@ exports.createChatMessage = function (query, callback) {
 					saveChatMessage(chat, users, query.message, callback);
 				});
 			} else {
+				console.log("Chat found");
 				saveChatMessage(chat, users, query.message, callback);
 			}
 
@@ -121,7 +144,7 @@ var saveChatMessage = function (chat, users, message, callback) {
 			return callback(err, null);
 		console.log("Chat  "+JSON.stringify(chat));
 		console.log("Chat message "+JSON.stringify(chatMessage));
-		chat.chat_messages.push(chatMessage);
+		chat.chat_messagess.push(chatMessage);
 		chat.save(callback);
 		//Chat.update(chat,{$push: {"chat_message": chatMessage._id}},callback)
 
