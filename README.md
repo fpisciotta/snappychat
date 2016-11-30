@@ -583,7 +583,7 @@ This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of S
 	
 	It creates a chat message and the chat conversation associated to it, if it doesn't exist
 	
-	- `POST https://snappychatapi.herokuapp.com/api/chats`
+- `POST https://snappychatapi.herokuapp.com/api/chats`
 	
 	####Params
 	```javascript
