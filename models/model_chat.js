@@ -33,10 +33,17 @@ exports.deleteChat = function (query, callback) {
 		if (users.length < 2)
 			return callback(new Error("Users not found"), null);
 		
-		Chat.remove({
+		Chat.find({
 			'user_creator_id' : {$in : [users[0]._id,users[1]._id]},
 			'user_receiver_id' : {$in : [users[0]._id,users[1]._id]},
-		}).exec(callback);
+		}).exec(function(err,chat){
+			ChatMessage.remove({chat_id : chat._id},function(err){
+				if(err)
+					callback(err,null);
+				console.log("Chat: "+JSON.stringify(chat));
+				Chat.remove(chat,callback);
+			})
+		});
 	
 	});
 }
@@ -144,7 +151,7 @@ var saveChatMessage = function (chat, users, message, callback) {
 			return callback(err, null);
 		console.log("Chat  "+JSON.stringify(chat));
 		console.log("Chat message "+JSON.stringify(chatMessage));
-		chat.chat_messagess.push(chatMessage);
+		chat.chat_messages.push(chatMessage);
 		chat.save(callback);
 		//Chat.update(chat,{$push: {"chat_message": chatMessage._id}},callback)
 
@@ -178,7 +185,16 @@ exports.getChatHistory = function (query, callback) {
 		Chat.find({
 			'user_creator_id' : {$in : [users[0]._id,users[1]._id]},
 			'user_receiver_id' : {$in : [users[0]._id,users[1]._id]},
-		}).populate('chat_messages').exec(function (err, chat) {
+		}).populate([{path:'user_creator_id', select:'name email nick_name'},
+		{path:'user_receiver_id', select:'name email nick_name'},
+		{path:'chat_messages', populate: [{
+			path: 'user_sender_id',
+			select:'email'
+		},{
+			path: 'user_receiver_id',
+			select:'email'
+		}]}])
+		.exec(function (err, chat) {
 			if (err)
 				return callback(err, null);
 

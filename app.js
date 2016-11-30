@@ -190,7 +190,7 @@ router.route('/users/:user_id/friends_pending')
 	
 router.route('/chats')
 
-    // create a chat conversation (accessed at POST http://localhost:5000/api/chats)
+    // create a chat message (accessed at POST http://localhost:5000/api/chats)
     .post(function(req, res) {
 		response = res;
 		modelChat.createChatMessage(req.body, function (err){
@@ -203,19 +203,6 @@ router.route('/chats')
         
     })
 	
-	.put(function(req, res) {
-			modelChat.updateChat(req.body,null,function(err,chat){
-				//console.log("User: "+JSON.stringify(user));
-				if (err)
-					res.status(500).send(err);
-				else if(chat == undefined || chat == null ){
-					res.status(400).json({ message: 'User not found' })
-				}else
-					res.status(204).send();
-			});
-    })
-
-
 	.get(function(req, res) {
 		var query = {
 			user_sender_id : req.param('user_sender_id'),

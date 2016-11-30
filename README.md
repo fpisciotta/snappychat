@@ -577,4 +577,128 @@ This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of S
 		"message": "Timeline deleted!"
 	}
 	  ```
+### User resources
+
+#### Create chat message
 	
+	It creates a chat message and the chat conversation associated to it, if it doesn't exist
+	
+	- `POST https://snappychatapi.herokuapp.com/api/chats`
+	####Params
+	```javascript
+	{
+		user_sender_id: {type: String, required : true}, //unique user identifier, must be email
+		user_receiver_id: {type: String, required : true}, //unique user identifier, must be email
+		message: {type : String, required : true},
+	}
+	```
+	####Example 
+	#####Request
+	```javascript
+	{
+		"user_sender_id":"grinch3@gmail.com",
+		"user_receiver_id":"grinch@gmail.com",
+		"message":"Hello Peter"
+	}
+	```
+	
+	#####Response
+		
+	Status: 201 CREATED |
+	-------------- |
+	```javascript
+	{
+		"message": "Chat message created!"
+	}
+	  ```
+#### Get Chat-conversation history
+
+- `GET https://snappychatapi.herokuapp.com/api/chats`
+
+	####Params
+	
+		user_sender_id : "unique user identifier, email must be used"
+		user_receiver_id : "unique user identifier, email must be used"
+		
+	####Example
+	
+	#####Request
+	`GET https://snappychatapi.herokuapp.com/api/chats?user_sender_id=grinch@gmail.com&user_receiver_id=grinch3@gmail.com`
+	#####Response
+		
+	Status: 200 OK |
+	-------------- |
+	```javascript
+	[
+	  {
+		"_id": "583f58f52898321a08f40265",
+		"user_creator_id": {
+		  "_id": "583a7db452dbee2c104b5ac2",
+		  "nick_name": "grinchss",
+		  "email": "grinch@gmail.com",
+		  "name": {
+			"first": "Juan",
+			"last": "Gonzalez"
+		  }
+		},
+		"user_receiver_id": {
+		  "_id": "583bb3c3e2bf36179cf78e17",
+		  "nick_name": "grinch",
+		  "email": "grinch3@gmail.com",
+		  "name": {
+			"first": "Juan",
+			"last": "Gonzalez"
+		  }
+		},
+		"__v": 1,
+		"chat_messages": [
+		  {
+			"_id": "583f58f52898321a08f40266",
+			"chat_id": "583f58f52898321a08f40265",
+			"user_sender_id": {
+			  "_id": "583a7db452dbee2c104b5ac2",
+			  "email": "grinch@gmail.com"
+			},
+			"user_receiver_id": {
+			  "_id": "583bb3c3e2bf36179cf78e17",
+			  "email": "grinch3@gmail.com"
+			},
+			"message": "Hello Peter",
+			"__v": 0,
+			"creationDate": "2016-11-30T22:55:49.722Z"
+		  }
+		],
+		"pending": false
+	  }
+	]
+	 ```
+	 
+	
+#### Delete Chat-conversation
+
+- `DELETE https://snappychatapi.herokuapp.com/api/chats`
+
+	```javascript
+	{
+		user_creator_id: {type: String, required : true}, //unique user identifier, must be email
+		user_receiver_id: {type: String, required : true}, //unique user identifier, must be email
+	}
+	```
+	####Example 
+	#####Request
+	```javascript
+	{
+		"user_creator_id":"grinch3@gmail.com",
+		"user_receiver_id":"grinch@gmail.com",
+	}
+	```
+	
+	#####Response
+		
+	Status: 200 OK |
+	-------------- |
+	```javascript
+	{
+		"message": "Chat deleted!"
+	}
+	  ```
