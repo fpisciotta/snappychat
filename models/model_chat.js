@@ -173,7 +173,7 @@ var saveChatMessage = function (chat, users, message, callback) {
 }
 
 exports.getChatHistory = function (query, callback) {
-	if(query){
+	if(JSON.stringify(query) != '{}'){
 		User.findOne({email:query.user_sender_id}).exec(function (err, user_sender) {
 			//console.log("User sender: "+JSON.stringify(user_sender));
 			if (err)
