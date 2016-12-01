@@ -11,9 +11,28 @@ exports.createUser = function (req,callback){
 }
 
 exports.updateUser = function (query, conditions,options,callback){
-	console.log("User body: "+JSON.stringify(conditions));
-	User.findOneAndUpdate(query,conditions,options,function(err,user){
-		callback(err,user);
+	//console.log("User body: "+JSON.stringify(conditions));
+	User.findOne(query,conditions,options,function(err,user){
+		
+		if(err)
+			return callback(err,null);
+		
+		if(user == null)
+			return callback(new Error("User not found"),null );
+		
+		for (var key in conditions){
+			
+			if(key == 'email'){
+				return callback(new Error('Email property cannot be modified'), null)
+			}
+			if(user[key])
+				user[key] = conditions[key];
+			else
+				user.key = conditions[key]
+		}
+		
+		user.save(callback)
+	
 	});
 }
 

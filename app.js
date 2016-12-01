@@ -32,7 +32,7 @@ router.route('/users')
     .post(function(req, res) {
 		modelUser.createUser(req, function (err){
 			if(err)
-				res.status(500).send(err);
+				res.status(500).send(err.message);
 			else
 				res.status(201).json({ message: 'User created!' });
 		});
@@ -44,7 +44,7 @@ router.route('/users')
 		console.log("Get all users");
 		modelUser.getUsers(function(err,users){
 			if (err)
-                res.status(500).send(err);
+                res.status(500).send(err.message);
 			else if(users == undefined || users == null )
 					res.status(404).json({ message: 'User not found' })
             else
@@ -58,7 +58,7 @@ router.route('/users/:user_id')
     .get(function(req, res) {
 		modelUser.getUserProfile(req,function(err,user){
 			if (err)
-                res.status(500).send(err);
+                res.status(500).send(err.message);
 			else if(user == undefined || user == null  )
 					res.status(404).json({ message: 'User not found' })
 			else
@@ -68,12 +68,12 @@ router.route('/users/:user_id')
 	
 	.put(function(req, res) {
 			modelUser.updateUser({email:req.params.user_id},req.body,null,function(err,user){
-				//console.log("User: "+JSON.stringify(user));
+				//console.log("Err: "+JSON.stringify(err, ["message", "arguments", "type", "name"]));
 				if (err)
-					res.status(500).send(err);
-				else if(user == undefined || user == null ){
-					res.status(400).json({ message: 'User not found' })
-				}else
+					res.status(500).send(err.message);
+				else if(user == undefined || user == null  )
+					res.status(404).json({ message: 'User not found' })
+				else
 					res.status(204).send();
 			});
     })
@@ -81,7 +81,7 @@ router.route('/users/:user_id')
 	.delete(function(req, res) {
 		modelUser.removeUser(req,function(err){
 			if (err)
-                res.status(500).send(err);
+                res.status(500).send(err.message);
 			else
 				res.status(200).json({ message: 'User deleted' });
 		});
@@ -91,7 +91,7 @@ router.route('/users/:user_id/timeline')
 	.post(function(req, res) {
 			modelUser.addTimeline({email:req.params.user_id},req.body,function(err,user){
 				if (err)
-					res.status(500).send(err);
+					res.status(500).send(err.message);
 				else
 					res.status(201).json({ message: 'Timeline added!' });
 			});
@@ -99,7 +99,7 @@ router.route('/users/:user_id/timeline')
 	.get(function(req, res) {
 		modelUser.getUserProfileAndTimeline(req,function(err,user){
 			if (err)
-                res.status(500).send(err);
+                res.status(500).send(err.message);
 			else
 				res.status(200).json(user);
 		});
@@ -109,9 +109,9 @@ router.route('/users/:user_id/timeline/:timeline_id')
 	.get(function(req, res) {
 		modelUser.getTimeline({_id:req.params.timeline_id},function(err,user){
 			if (err)
-                res.status(500).send(err);
+                res.status(500).send(err.message);
 			else if(user == undefined || user == null  )
-					res.status(404).json({ message: 'Timeline not found' })
+				res.status(404).json({ message: 'Timeline not found' })
 			else
 				res.status(200).json(user);
 		});
@@ -119,7 +119,7 @@ router.route('/users/:user_id/timeline/:timeline_id')
 	.delete(function(req, res) {
 			modelUser.removeTimeline({_id:req.params.timeline_id},function(err,user){
 				if (err)
-					res.status(500).send(err);
+					res.status(500).send(err.message);
 				else
 					res.status(200).json({ message: 'Timeline deleted!' });
 			});
@@ -129,7 +129,7 @@ router.route('/users/:user_id/friends')
 	.get(function(req, res) {
 		modelUser.getUserProfileAndFriends(req,function(err,user){
 			if (err)
-				res.status(500).send(err);
+				res.status(500).send(err.message);
 			else
 				res.status(200).json(user);
 		});
@@ -137,7 +137,7 @@ router.route('/users/:user_id/friends')
 	.delete(function(req, res) {
 			modelUser.removeFriend({email:req.params.user_id},req.body,function(err,user){
 				if (err)
-					res.status(500).send(err);
+					res.status(500).send(err.message);
 				else
 					res.status(200).json({ message: 'Friend deleted!' });
 			});
@@ -147,7 +147,7 @@ router.route('/users/:user_id/friends_request')
 	.post(function(req, res) {
 			modelUser.addFriendRequest({email:req.params.user_id},req.body,function(err,user){
 				if (err)
-					res.status(500).send(err);
+					res.status(500).send(err.message);
 				else
 					res.status(201).json({ message: 'Friend request added!' });
 			});
@@ -155,7 +155,7 @@ router.route('/users/:user_id/friends_request')
 	.get(function(req, res) {
 		modelUser.getUserProfileAndFriendsRequest(req,function(err,user){
 			if (err)
-                res.status(500).send(err);
+                res.status(500).send(err.message);
 			else
 				res.status(200).json(user);
 		});
@@ -163,7 +163,7 @@ router.route('/users/:user_id/friends_request')
 	.delete(function(req, res) {
 			modelUser.removeFriendRequest({email:req.params.user_id},req.body,function(err,user){
 				if (err)
-					res.status(500).send(err);
+					res.status(500).send(err.message);
 				else
 					res.status(200).json({ message: 'Friend request deleted!' });
 			});
@@ -174,7 +174,7 @@ router.route('/users/:user_id/friends_pending')
 	.post(function(req, res) {
 			modelUser.addFriend({email:req.params.user_id},req.body,function(err,user){
 				if (err)
-					res.status(500).send(err);
+					res.status(500).send(err.message);
 				else
 					res.status(201).json({ message: 'Friend pending modified!' });
 			});
@@ -182,7 +182,7 @@ router.route('/users/:user_id/friends_pending')
 	.get(function(req, res) {
 		modelUser.getUserProfileAndFriendsPending(req,function(err,user){
 			if (err)
-                res.status(500).send(err);
+                res.status(500).send(err.message);
 			else
 				res.status(200).json(user);
 		});
@@ -195,7 +195,7 @@ router.route('/chats')
 		response = res;
 		modelChat.createChatMessage(req.body, function (err){
 			if(err)
-				res.status(500).send(err);
+				res.status(500).send(err.message);
 			else
 				res.status(201).json({ message: 'Chat message created!' });
 		});
@@ -210,7 +210,7 @@ router.route('/chats')
 		}
 		modelChat.getChatHistory(query,function(err,chat){
 			if (err)
-                res.status(500).send(err);
+                res.status(500).send(err.message);
 			else if(chat == undefined || chat == null )
 					res.status(404).json({ message: 'Chat not found' })
             else
@@ -221,7 +221,7 @@ router.route('/chats')
 		response = res;
 		modelChat.deleteChat(req.body, function (err){
 			if(err)
-				res.status(500).send(err);
+				res.status(500).send(err.message);
 			else
 				res.status(200).json({ message: 'Chat deleted!' });
 		});

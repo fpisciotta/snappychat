@@ -10,7 +10,7 @@ var userSchema = new mongoose.Schema({
   status : { type: Boolean, default : false},
   nick_name: { type: String, required : true},
   email: { type: String, required : true},
-  password : {type : String, required : true, select : false},
+  token : {type : String, select : false},
   image : {
 	  name : { type: String},
 	  data : {type : Buffer}
