@@ -162,51 +162,62 @@ var saveChatMessage = function (chat, users, message, callback) {
 			return callback(err, null);
 		console.log("Chat  "+JSON.stringify(chat));
 		console.log("Chat message "+JSON.stringify(chatMessage));
-		//chat.chat_messages.push(chatMessage);
-		//chat.save(callback);
-		Chat.update(chat,{$push: {"chat_messages": chatMessage._id}},callback)
-
+		//chat[0].chat_messages.push(chatMessage);
+		//chat[0].save(callback);
+		if(chat.length)
+			Chat.update(chat[0],{$push: {"chat_messages": chatMessage._id}},callback)
+		else
+			Chat.update(chat,{$push: {"chat_messages": chatMessage._id}},callback)
 	});
 
 }
 
 exports.getChatHistory = function (query, callback) {
-	User.find({
-		'email': {$in : [query.user_sender_id,query.user_receiver_id]}
-	}).exec(function (err, users) {
-		console.log("Users: "+JSON.stringify(users));
+	User.findOne({email:query.user_sender_id}).exec(function (err, user_sender) {
+		//console.log("User sender: "+JSON.stringify(user_sender));
 		if (err)
 			return callback(err, null);
 
-		if (users == undefined || users == null)
-			return callback(new Error("Users sender not found"), null);
+		if (user_sender == undefined || user_sender == null)
+			return callback(new Error("User sender not found"), null);
 
-		if (users.length < 2)
-			return callback(new Error("Users not found"), null);
-		
-		//Search for chat conversations
-		Chat.find({
-			'user_creator_id' : users[0]._id,
-			'user_receiver_id' : users[1]._id
-		}).populate([{path:'user_creator_id', select:'name email nick_name'},
-		{path:'user_receiver_id', select:'name email nick_name'},
-		{path:'chat_messages', populate: [{
-			path: 'user_sender_id',
-			select:'email'
-		},{
-			path: 'user_receiver_id',
-			select:'email'
-		}]}])
-		.exec(function (err, chat) {
-			console.log("Chat: "+JSON.stringify(chat));
+		User.findOne({email:query.user_receiver_id}).exec(function (err, user_receiver) {
+			//console.log("User receiver: "+JSON.stringify(user_receiver));
 			if (err)
 				return callback(err, null);
 
-			if (chat == undefined || chat == null)
-				return callback(new Error("Chat conversation not found"), null);
+			if (user_receiver == undefined || user_receiver == null)
+				return callback(new Error("User receiver not found"), null);
+		
+			users = [user_sender,user_receiver];
+			
+			//Search for chat conversations
+			Chat.find({
+				'user_creator_id' : {$in : [users[0]._id,users[1]._id]},
+				'user_receiver_id' : {$in : [users[0]._id,users[1]._id]}
+			}).populate([{path:'user_creator_id', select:'name email nick_name'},
+			{path:'user_receiver_id', select:'name email nick_name'},
+			{path:'chat_messages', populate: [{
+				path: 'user_sender_id',
+				select:'email'
+			},{
+				path: 'user_receiver_id',
+				select:'email'
+			}]}])
+			.exec(function (err, chat) {
+				console.log("Chat: "+JSON.stringify(chat));
+				if (err)
+					return callback(err, null);
 
-			callback(err, chat);
+				if (chat == undefined || chat == null)
+					return callback(new Error("Chat conversation not found"), null);
+
+				callback(err, chat);
+			});
+				
 		});
+		
 	});
+		
 
 }
