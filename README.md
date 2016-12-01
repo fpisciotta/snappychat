@@ -618,9 +618,12 @@ This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of S
 - `GET https://snappychatapi.herokuapp.com/api/chats`
 
 	####Params
+		
+		If you don't pass params, it returns all the chat conversations.
 	
 		user_sender_id : "unique user identifier, email must be used"
 		user_receiver_id : "unique user identifier, email must be used"
+		
 		
 	####Example
 	
