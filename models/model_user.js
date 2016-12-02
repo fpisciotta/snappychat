@@ -12,7 +12,7 @@ exports.createUser = function (req,callback){
 
 exports.updateUser = function (query, conditions,callback){
 	//console.log("User body: "+JSON.stringify(conditions));
-	User.findOne(query,conditions,function(err,user){
+	User.findOne(query,function(err,user){
 		
 		if(err)
 			return callback(err,null);
@@ -27,10 +27,12 @@ exports.updateUser = function (query, conditions,callback){
 			}
 			
 			if(user[key] != null){
+				console.log("User key exist");
 				user[key] = conditions[key];
-			}else
+			}else{
+				console.log("User key does not exist");
 				user.key = conditions[key];
-
+			}
 		}
 		
 		
