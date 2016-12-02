@@ -3,22 +3,20 @@ var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
 var userSchema = new mongoose.Schema({
-  name: {
-    first: { type: String,required : true},
-    last: { type: String, trim: true }
-  },
+  first_name:{ type: String,required : true},
+  last_name:{ type: String, trim: true },
   status : { type: Boolean, default : false},
   nick_name: { type: String, required : true},
   email: { type: String, required : true},
   token : {type : String},
   image : {
-	  name : { type: String, required : true},
-	  data : {type : Buffer, required : true}
+	  name : { type: String},
+	  data : {type : Buffer}
   },
-  location: { type: String, required : true},
-  profession: { type: String, required : true},
-  about_me: { type: String, required : true},
-  interests: { type: String, required : true},
+  location: { type: String},
+  profession: { type: String},
+  about_me: { type: String},
+  interests: { type: String},
   age: { type: Number, min: 10},
   visibility : { type: String, default : 'friends-only'},
   notification : { type: Boolean, default : true},
@@ -33,12 +31,16 @@ var userSchema = new mongoose.Schema({
   friends_requested : [{
 	user_id : { type: Schema.Types.ObjectId, ref: 'User' },
 	message : {type : String},
-	creationDate: {type: Date, default: Date.now}}],
+	creationDate: {type: Date, default: Date.now}}]
 }, { autoIndex: true });
 
 var timelineSchema = new mongoose.Schema({
 	user_id : {type: mongoose.Schema.Types.ObjectId, ref : 'User'},
 	comment : {type : String, required : true},
+	images : [{
+	  name : { type: String},
+	  data : {type : Buffer}
+    }],
 	creationDate: {type: Date, default: Date.now}
 });
 
