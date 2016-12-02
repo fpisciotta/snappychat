@@ -67,7 +67,7 @@ router.route('/users/:user_id')
     })
 	
 	.put(function(req, res) {
-			modelUser.updateUser({email:req.params.user_id},req.body,null,function(err,user){
+			modelUser.updateUser({email:req.params.user_id},req.body,function(err,user){
 				//console.log("Err: "+JSON.stringify(err, ["message", "arguments", "type", "name"]));
 				if (err)
 					res.status(500).send(err.message);
