@@ -25,7 +25,10 @@ exports.updateUser = function (query, conditions,callback){
 			if(key == 'email'){
 				return callback(new Error('Email property cannot be modified'), null)
 			}
-			
+			console.log("Conditions: "+JSON.stringify(conditions));
+			console.log("key: "+key);
+			console.log("User: "+JSON.stringify(user));
+			console.log("User key: "+user[key]);
 			if(user[key] != null){
 				console.log("User key exist");
 				user[key] = conditions[key];
