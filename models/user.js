@@ -11,7 +11,7 @@ var userSchema = new mongoose.Schema({
   token : {type : String},
   image : {
 	  name : { type: String},
-	  data : {type : Buffer}
+	  data : {type : String}
   },
   location: { type: String},
   profession: { type: String},
