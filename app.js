@@ -30,6 +30,7 @@ router.route('/users')
 
     // create an user (accessed at POST http://localhost:5000/api/users)
     .post(function(req, res) {
+		response = res;
 		modelUser.createUser(req, function (err){
 			if(err)
 				res.status(500).send(err.message);
@@ -41,8 +42,12 @@ router.route('/users')
     })
 	
 	.get(function(req, res) {
+		response = res;
 		console.log("Get all users");
-		modelUser.getUsers(function(err,users){
+		var query = {
+			search : req.param('search')
+		}
+		modelUser.getUsers(query,function(err,users){
 			if (err)
                 res.status(500).send(err.message);
 			else if(users == undefined || users == null )
@@ -56,6 +61,7 @@ router.route('/users/:user_id')
 
     // get the bear with that id (accessed at GET http://localhost:5000/api/users/:user_id)
     .get(function(req, res) {
+		response = res;
 		modelUser.getUserProfile(req,function(err,user){
 			if (err)
                 res.status(500).send(err.message);
@@ -67,6 +73,7 @@ router.route('/users/:user_id')
     })
 	
 	.put(function(req, res) {
+		response = res;
 			modelUser.updateUser({email:req.params.user_id},req.body,function(err,user){
 				//console.log("Err: "+JSON.stringify(err, ["message", "arguments", "type", "name"]));
 				if (err)
@@ -79,6 +86,7 @@ router.route('/users/:user_id')
     })
 	
 	.delete(function(req, res) {
+		response = res;
 		modelUser.removeUser(req,function(err){
 			if (err)
                 res.status(500).send(err.message);
@@ -89,6 +97,7 @@ router.route('/users/:user_id')
 	
 router.route('/users/:user_id/timeline')
 	.post(function(req, res) {
+		response = res;
 			modelUser.addTimeline({email:req.params.user_id},req.body,function(err,user){
 				if (err)
 					res.status(500).send(err.message);
@@ -97,6 +106,7 @@ router.route('/users/:user_id/timeline')
 			});
     })
 	.get(function(req, res) {
+		response = res;
 		modelUser.getUserProfileAndTimeline(req,function(err,user){
 			if (err)
                 res.status(500).send(err.message);
@@ -107,6 +117,7 @@ router.route('/users/:user_id/timeline')
 
 router.route('/users/:user_id/timeline/:timeline_id')	
 	.get(function(req, res) {
+		response = res;
 		modelUser.getTimeline({_id:req.params.timeline_id},function(err,user){
 			if (err)
                 res.status(500).send(err.message);
@@ -117,6 +128,7 @@ router.route('/users/:user_id/timeline/:timeline_id')
 		});
     })
 	.delete(function(req, res) {
+		response = res;
 			modelUser.removeTimeline({_id:req.params.timeline_id},function(err,user){
 				if (err)
 					res.status(500).send(err.message);
@@ -127,6 +139,7 @@ router.route('/users/:user_id/timeline/:timeline_id')
 
 router.route('/users/:user_id/friends')
 	.get(function(req, res) {
+		response = res;
 		modelUser.getUserProfileAndFriends(req,function(err,user){
 			if (err)
 				res.status(500).send(err.message);
@@ -135,6 +148,7 @@ router.route('/users/:user_id/friends')
 		});
 	})
 	.delete(function(req, res) {
+		response = res;
 			modelUser.removeFriend({email:req.params.user_id},req.body,function(err,user){
 				if (err)
 					res.status(500).send(err.message);
@@ -145,6 +159,7 @@ router.route('/users/:user_id/friends')
 	
 router.route('/users/:user_id/friends_request')
 	.post(function(req, res) {
+		response = res;
 			modelUser.addFriendRequest({email:req.params.user_id},req.body,function(err,user){
 				if (err)
 					res.status(500).send(err.message);
@@ -153,6 +168,7 @@ router.route('/users/:user_id/friends_request')
 			});
     })
 	.get(function(req, res) {
+		response = res;
 		modelUser.getUserProfileAndFriendsRequest(req,function(err,user){
 			if (err)
                 res.status(500).send(err.message);
@@ -161,6 +177,7 @@ router.route('/users/:user_id/friends_request')
 		});
     })
 	.delete(function(req, res) {
+		response = res;
 			modelUser.removeFriendRequest({email:req.params.user_id},req.body,function(err,user){
 				if (err)
 					res.status(500).send(err.message);
@@ -172,6 +189,7 @@ router.route('/users/:user_id/friends_request')
 	
 router.route('/users/:user_id/friends_pending')
 	.post(function(req, res) {
+		response = res;
 			modelUser.addFriend({email:req.params.user_id},req.body,function(err,user){
 				if (err)
 					res.status(500).send(err.message);
@@ -180,6 +198,7 @@ router.route('/users/:user_id/friends_pending')
 			});
     })
 	.get(function(req, res) {
+		response = res;
 		modelUser.getUserProfileAndFriendsPending(req,function(err,user){
 			if (err)
                 res.status(500).send(err.message);
@@ -204,6 +223,7 @@ router.route('/chats')
     })
 	
 	.get(function(req, res) {
+		response = res;
 		var query = {
 			user_sender_id : req.param('user_sender_id'),
 			user_receiver_id : req.param('user_receiver_id')

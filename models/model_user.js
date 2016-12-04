@@ -95,10 +95,17 @@ exports.getUserProfileAndTimeline = function (req, callback){
 	
 }
 
-exports.getUsers = function (callback){
-	User.find(function(err, users) {
+exports.getUsers = function (query,callback){
+	if(JSON.stringify(query) != '{}'){
+		console.log("Query found");
+		User.find().or([{nick_name : new RegExp(query.search, 'i')}, {interests : new RegExp(query.search, 'i')}]).exec(function(err, users) {
 			callback(err,users)
-	});
+		});
+	}else{
+		User.find(function(err, users) {
+				callback(err,users)
+		});
+	}
 	
 }
 
