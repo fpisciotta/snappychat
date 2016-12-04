@@ -39,7 +39,7 @@ var timelineSchema = new mongoose.Schema({
 	comment : {type : String, required : true},
 	images : [{
 	  name : { type: String},
-	  data : {type : Buffer}
+	  data : {type : String}
     }],
 	creationDate: {type: Date, default: Date.now}
 });

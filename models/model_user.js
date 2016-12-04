@@ -61,8 +61,8 @@ exports.getUserProfile = function (req, callback){
 
 exports.getUserProfileAndFriends = function (req, callback){
 	//console.log("User id: ",req.params.user_id);
-	User.find({'email': req.params.user_id}).select('-timeline')
-	.populate('friends', 'name email nick_name image -_id').exec(function(err, user) {
+	User.find({'email': req.params.user_id}).select('-timeline -image')
+	.populate('friends', 'first_name last_name email nick_name image -_id').exec(function(err, user) {
 		callback(err,user);
 	});
 	
@@ -70,8 +70,8 @@ exports.getUserProfileAndFriends = function (req, callback){
 
 exports.getUserProfileAndFriendsRequest = function (req, callback){
 	//console.log("User id: ",req.params.user_id);
-	User.find({'email': req.params.user_id}).select('-friends_pending -friends -timeline')
-	.populate('friends_requested.user_id','name email nick_name -_id').exec(function(err, user) {
+	User.find({'email': req.params.user_id}).select('-friends_pending -friends -timeline -image')
+	.populate('friends_requested.user_id','first_name last_name email nick_name image -_id').exec(function(err, user) {
 		callback(err,user);
 	});
 	
@@ -79,8 +79,8 @@ exports.getUserProfileAndFriendsRequest = function (req, callback){
 
 exports.getUserProfileAndFriendsPending = function (req, callback){
 	//console.log("User id: ",req.params.user_id);
-	User.find({'email': req.params.user_id}).select('-friends_requested -friends -timeline')
-	.populate('friends_pending.user_id','name email nick_name -_id').exec(function(err, user) {
+	User.find({'email': req.params.user_id}).select('-friends_requested -friends -timeline -image')
+	.populate('friends_pending.user_id','first_name last_name email nick_name image -_id').exec(function(err, user) {
 		callback(err,user);
 	});
 	
@@ -88,7 +88,7 @@ exports.getUserProfileAndFriendsPending = function (req, callback){
 
 exports.getUserProfileAndTimeline = function (req, callback){
 	console.log("User id: ",req.params.user_id);
-	User.find({'email': req.params.user_id}).select('-friends_requested -friends_pending -friends')
+	User.find({'email': req.params.user_id}).select('-friends_requested -friends_pending -friends -image')
 	.populate({path: 'timeline', options: { sort: { 'creationDate': -1 } } }).exec(function(err, user) {
 		callback(err,user);
 	});
