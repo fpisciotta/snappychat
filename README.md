@@ -12,10 +12,8 @@ This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of S
 	####Params
 	```javascript
 	{
-		name: {
-			first: { type: String,required : true},
-			last: { type: String, trim: true }
-		},
+		first_name : { type: String,required : true},
+		last_name : { type: String,required : true},
 		status : { type: Boolean, default : false},
 		nick_name: { type: String, required : true},
 		email: { type: String, required : true},
