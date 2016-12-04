@@ -65,6 +65,18 @@ This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of S
 	
 - `GET https://snappychatapi.herokuapp.com/api/users`
 	
+	####Params
+		
+		If you don't pass params, it returns all the users.
+	
+		search : "it can be any string"
+		
+		The param is used to search into nick_name and interests fields.
+		
+	####Example
+	
+	#####Request
+		GET https://snappychatapi.herokuapp.com/api/users?search=grin
 	#####Response
 		
 	Status: 200 OK |
@@ -73,17 +85,30 @@ This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of S
 	[
 	  {
 		"_id": "583a7db452dbee2c104b5ac2",
-		"nick_name": "grinchss",
+		"nick_name": "grinchy",
 		"email": "grinch@gmail.com",
 		"age": 10,
-		"__v": 4,
-		"friends_requested": [],
+		"name": {
+		  "first": "Juan",
+		  "last": "Gonzalez"
+		},
+		"__v": 5,
+		"token": "grinchy",
+		"friends_requested": [
+		  {
+			"message": "Hello, I'd like to be your friend",
+			"user_id": "583dfb71c4747e39682bae94",
+			"_id": "583dffc8c4747e39682bae95",
+			"creationDate": "2016-11-29T22:23:04.146Z"
+		  }
+		],
 		"friends_pending": [],
 		"timeline": [
 		  "583be1ad7ec7395204265e4a",
 		  "583d285591d80a1058ef5dfa",
 		  "583d289c91d80a1058ef5dfb",
-		  "583d2905612d394608576c58"
+		  "583d2905612d394608576c58",
+		  "583e0265c4747e39682bae97"
 		],
 		"friends": [
 		  "583bb3c3e2bf36179cf78e17"
@@ -92,12 +117,32 @@ This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of S
 		"creation_date": "2016-11-27T06:31:16.589Z",
 		"notification": true,
 		"visibility": "friends-only",
-		"status": false,
+		"status": false
+	  },
+	  {
+		"_id": "583bb3c3e2bf36179cf78e17",
+		"nick_name": "grinch",
+		"email": "grinch3@gmail.com",
+		"password": "123",
+		"age": 10,
 		"name": {
 		  "first": "Juan",
 		  "last": "Gonzalez"
-		}
-	  }]
+		},
+		"__v": 0,
+		"friends_requested": [],
+		"friends_pending": [],
+		"timeline": [],
+		"friends": [
+		  "583a7db452dbee2c104b5ac2"
+		],
+		"update_date": "2016-11-28T04:34:11.064Z",
+		"creation_date": "2016-11-28T04:34:11.064Z",
+		"notification": true,
+		"visibility": "friends-only",
+		"status": false
+	  }
+	]
 	  ```
 
 #### Get user
