@@ -71,7 +71,7 @@ exports.getUserProfileAndFriends = function (req, callback){
 exports.getUserProfileAndFriendsRequest = function (req, callback){
 	//console.log("User id: ",req.params.user_id);
 	User.find({'email': req.params.user_id}).select('-friends_pending -friends -timeline -image')
-	.populate('friends_requested.user_id','first_name last_name email nick_name image -_id').exec(function(err, user) {
+	.populate('friends_requested.user_id','-friends_pending -friends -timeline').exec(function(err, user) {
 		callback(err,user);
 	});
 	
