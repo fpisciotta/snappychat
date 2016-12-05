@@ -62,7 +62,7 @@ exports.getUserProfile = function (req, callback){
 exports.getUserProfileAndFriends = function (req, callback){
 	//console.log("User id: ",req.params.user_id);
 	User.find({'email': req.params.user_id}).select('-friends_pending -friends_requested -timeline -image')
-	.populate('friends', 'first_name last_name email nick_name image -_id').exec(function(err, user) {
+	.populate('friends', '-friends requested -friends_pending -friends -timeline').exec(function(err, user) {
 		callback(err,user);
 	});
 	
@@ -71,7 +71,7 @@ exports.getUserProfileAndFriends = function (req, callback){
 exports.getUserProfileAndFriendsRequest = function (req, callback){
 	//console.log("User id: ",req.params.user_id);
 	User.find({'email': req.params.user_id}).select('-friends_pending -friends -timeline -image')
-	.populate('friends_requested.user_id','-friends_pending -friends -timeline').exec(function(err, user) {
+	.populate('friends_requested.user_id','-friends requested -friends_pending -friends -timeline').exec(function(err, user) {
 		callback(err,user);
 	});
 	
@@ -80,7 +80,7 @@ exports.getUserProfileAndFriendsRequest = function (req, callback){
 exports.getUserProfileAndFriendsPending = function (req, callback){
 	//console.log("User id: ",req.params.user_id);
 	User.find({'email': req.params.user_id}).select('-friends_requested -friends -timeline -image')
-	.populate('friends_pending.user_id','first_name last_name email nick_name image -_id').exec(function(err, user) {
+	.populate('friends_pending.user_id','-friends requested -friends_pending -friends -timeline').exec(function(err, user) {
 		callback(err,user);
 	});
 	
