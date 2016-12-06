@@ -37,17 +37,15 @@ This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of S
 	#####Request
 	```javascript
 	{
+		"first_name": "Jhon",
+		"last_name": "Peters",
 		"nick_name": "jhony",
 		"email": "jhonyh@gmail.com",
 		"password" : "safsfsffs",
 		"age": 18,
 		"notification": true, 
 		"visibility": "friends-only",
-		"status": false,
-		"name": {
-		  "first": "Jhon",
-		  "last": "Peters"
-		}
+		"status": false
 	}
 	```
 	

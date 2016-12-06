@@ -135,7 +135,7 @@ exports.createChatMessage = function (query, callback) {
 					});
 				} else {
 					console.log("Chat found");
-					saveChatMessage(chat, [user_sender,user_receiver], query.message, callback);
+					saveChatMessage(chat[0], [user_sender,user_receiver], query.message, callback);
 				}
 
 			});
@@ -155,6 +155,7 @@ var saveChatMessage = function (chat, users, message, callback) {
 		user_receiver_id: users[1]._id,
 		message: message
 	}
+	console.log("New Chat message "+JSON.stringify(new_chat_message));
 	var chatMessage = new ChatMessage(new_chat_message);
 	//Store Chat_message
 	chatMessage.save(function (err) {
