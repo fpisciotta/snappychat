@@ -316,7 +316,17 @@ exports.updateChatConversation = function (query, conditions,callback){
 
 exports.getChatConversation = function (req, callback){
 		//console.log("User id: ",req.params.user_id);
-		Chat.find(req).exec(function(err, chat) {
+		Chat.find(req)
+		.populate([{path:'user_creator_id', select:'name email nick_name'},
+		{path:'user_receiver_id', select:'name email nick_name'},
+		{path:'chat_messages', populate: [{
+			path: 'user_sender_id',
+			select:'email'
+		},{
+			path: 'user_receiver_id',
+			select:'email'
+		}]}])
+		.exec(function(err, chat) {
             callback(err,chat);
         });
 }
