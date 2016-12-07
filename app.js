@@ -224,9 +224,15 @@ router.route('/chats')
 	
 	.get(function(req, res) {
 		response = res;
-		var query = {
-			user_sender_id : req.param('user_sender_id'),
-			user_receiver_id : req.param('user_receiver_id')
+		if(req.param('search') != null){
+			var query = {
+				search : req.param('search')
+			}
+		}else{
+			var query = {
+				user_sender_id : req.param('user_sender_id'),
+				user_receiver_id : req.param('user_receiver_id')
+			}
 		}
 		modelChat.getChatHistory(query,function(err,chat){
 			if (err)

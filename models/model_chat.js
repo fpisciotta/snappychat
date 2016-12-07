@@ -130,7 +130,7 @@ exports.createChatMessage = function (query, callback) {
 							return callback(err, null);
 						if (chat == undefined || chat == null)
 							return callback(new Error("Chat not found"), null);
-						
+						console.log("Chat created");
 						saveChatMessage(chat, users, query.message, callback);
 					});
 				} else {
@@ -175,51 +175,84 @@ var saveChatMessage = function (chat, users, message, callback) {
 
 exports.getChatHistory = function (query, callback) {
 	if(JSON.stringify(query) != '{}'){
-		User.findOne({email:query.user_sender_id}).exec(function (err, user_sender) {
-			//console.log("User sender: "+JSON.stringify(user_sender));
-			if (err)
-				return callback(err, null);
-
-			if (user_sender == undefined || user_sender == null)
-				return callback(new Error("User sender not found"), null);
-
-			User.findOne({email:query.user_receiver_id}).exec(function (err, user_receiver) {
-				//console.log("User receiver: "+JSON.stringify(user_receiver));
+		if(query.search != null){
+			console.log("Search found");
+			User.findOne({email:query.search}).exec(function (err, user_sender) {
 				if (err)
 					return callback(err, null);
 
-				if (user_receiver == undefined || user_receiver == null)
-					return callback(new Error("User receiver not found"), null);
-			
-				users = [user_sender,user_receiver];
+				if (user_sender == undefined || user_sender == null)
+					return callback(new Error("User sender not found"), null);
 				
-				//Search for chat conversations
-				Chat.find({
-					'user_creator_id' : {$in : [users[0]._id,users[1]._id]},
-					'user_receiver_id' : {$in : [users[0]._id,users[1]._id]}
-				}).populate([{path:'user_creator_id', select:'name email nick_name'},
-				{path:'user_receiver_id', select:'name email nick_name'},
-				{path:'chat_messages', populate: [{
-					path: 'user_sender_id',
-					select:'email'
-				},{
-					path: 'user_receiver_id',
-					select:'email'
-				}]}])
-				.exec(function (err, chat) {
-					console.log("Chat: "+JSON.stringify(chat));
+				Chat.find().or([{user_creator_id : user_sender._id}, {user_receiver_id : user_sender._id}])
+					.populate([{path:'user_creator_id', select:'name email nick_name'},
+					{path:'user_receiver_id', select:'name email nick_name'},
+					{path:'chat_messages', populate: [{
+						path: 'user_sender_id',
+						select:'email'
+					},{
+						path: 'user_receiver_id',
+						select:'email'
+					}]}])
+					.exec(function (err, chat) {
+						//console.log("Chat: "+JSON.stringify(chat));
+						if (err)
+							return callback(err, null);
+
+						if (chat == undefined || chat == null)
+							return callback(new Error("Chat conversation not found"), null);
+
+						callback(err, chat);
+					});
+				
+			});
+		}else{
+			User.findOne({email:query.user_sender_id}).exec(function (err, user_sender) {
+				//console.log("User sender: "+JSON.stringify(user_sender));
+				if (err)
+					return callback(err, null);
+
+				if (user_sender == undefined || user_sender == null)
+					return callback(new Error("User sender not found"), null);
+
+				User.findOne({email:query.user_receiver_id}).exec(function (err, user_receiver) {
+					//console.log("User receiver: "+JSON.stringify(user_receiver));
 					if (err)
 						return callback(err, null);
 
-					if (chat == undefined || chat == null)
-						return callback(new Error("Chat conversation not found"), null);
-
-					callback(err, chat);
-				});
+					if (user_receiver == undefined || user_receiver == null)
+						return callback(new Error("User receiver not found"), null);
+				
+					users = [user_sender,user_receiver];
 					
+					//Search for chat conversations
+					Chat.find({
+						'user_creator_id' : {$in : [users[0]._id,users[1]._id]},
+						'user_receiver_id' : {$in : [users[0]._id,users[1]._id]}
+					}).populate([{path:'user_creator_id', select:'name email nick_name'},
+					{path:'user_receiver_id', select:'name email nick_name'},
+					{path:'chat_messages', populate: [{
+						path: 'user_sender_id',
+						select:'email'
+					},{
+						path: 'user_receiver_id',
+						select:'email'
+					}]}])
+					.exec(function (err, chat) {
+						//console.log("Chat: "+JSON.stringify(chat));
+						if (err)
+							return callback(err, null);
+
+						if (chat == undefined || chat == null)
+							return callback(new Error("Chat conversation not found"), null);
+
+						callback(err, chat);
+					});
+						
+				});
+				
 			});
-			
-		});
+		}
 	}else{
 		//Search for chat conversations
 		Chat.find().populate([{path:'user_creator_id', select:'name email nick_name'},
@@ -232,7 +265,7 @@ exports.getChatHistory = function (query, callback) {
 			select:'email'
 		}]}])
 		.exec(function (err, chat) {
-			console.log("Chat: "+JSON.stringify(chat));
+			//console.log("Chat: "+JSON.stringify(chat));
 			if (err)
 				return callback(err, null);
 

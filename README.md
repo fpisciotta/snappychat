@@ -660,12 +660,16 @@ This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of S
 
 	####Params
 		
-		If you don't pass params, it returns all the chat conversations.
-	
+		search : "unique user identifier, email must be used" 
+		
+		It search for all the chat conversations in which this user is involved.
+		
+		or 
+		
 		user_sender_id : "unique user identifier, email must be used"
 		user_receiver_id : "unique user identifier, email must be used"
 		
-		
+		If you don't pass params, it returns all the chat conversations.
 	####Example
 	
 	#####Request
