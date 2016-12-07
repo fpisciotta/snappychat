@@ -254,7 +254,32 @@ router.route('/chats')
         
         
     });
-	
+
+router.route('/chats/:chat_id')
+	.get(function(req, res) {
+		response = res;
+		modelChat.getChatConversation({_id:req.params.chat_id},function(err,user){
+			if (err)
+                res.status(500).send(err.message);
+			else if(user == undefined || user == null  )
+					res.status(404).json({ message: 'User not found' })
+			else
+				res.status(200).json(user);
+		});
+    })
+	.put(function(req, res) {
+		response = res;
+			modelChat.updateChatConversation({_id:req.params.chat_id},req.body,function(err,user){
+				//console.log("Err: "+JSON.stringify(err, ["message", "arguments", "type", "name"]));
+				if (err)
+					res.status(500).send(err.message);
+				else if(user == undefined || user == null  )
+					res.status(404).json({ message: 'User not found' })
+				else
+					res.status(204).send();
+			});
+    })
+
 
 // The http server will listen to an appropriate port, or default to
 // port 5000.

@@ -752,3 +752,72 @@ This [API](https://snappychatapi.herokuapp.com/) will serve as the back-end of S
 		"message": "Chat deleted!"
 	}
 	  ```
+#### Get Chat conversation
+	  
+- `GET https://snappychatapi.herokuapp.com/api/chats/:chat_id`
+
+	####Params
+	
+		chat_id : "unique chat conversation identifier"
+		
+	####Example 
+	#####Response
+		
+	Status: 200 OK |
+	-------------- |
+	```javascript
+	[
+	  {
+		"_id": "58477d53e711dc00044dfe7b",
+		"user_creator_id": "5841453715d97c0f2447e2f0",
+		"user_receiver_id": "58477ceee711dc00044dfe78",
+		"__v": 0,
+		"chat_messages": [
+		  "58477d53e711dc00044dfe7c",
+		  "58477d5ce711dc00044dfe7d",
+		  "58477d64e711dc00044dfe7e",
+		  "58477dc8e711dc00044dfe7f",
+		  "58477dd4e711dc00044dfe80",
+		  "58477de7e711dc00044dfe81",
+		  "58477e0fe711dc00044dfe82",
+		  "58477e28e711dc00044dfe83",
+		  "58477e3ee711dc00044dfe84",
+		  "58477e84e711dc00044dfe85",
+		  "58477edbe711dc00044dfe86",
+		  "584780b2e711dc00044dfe87",
+		  "58478183e711dc00044dfe88",
+		  "58478193e711dc00044dfe89",
+		  "584782ede711dc00044dfe8a",
+		  "584786c549f50700048409f9",
+		  "584786f249f50700048409fa"
+		],
+		"pending": false
+	  }
+	]
+	  ```
+
+#### Update user
+	  
+- `PUT https://snappychatapi.herokuapp.com/api/chats/:chat_id`
+	
+	####Params
+	
+		chat_id : "unique chat conversation identifier"
+		
+		{
+			pending: {boolean}
+		}
+		
+	####Example 
+	#####Request
+	```javascript
+	{
+		"pending": true
+	}
+	```
+	
+	#####Response
+		
+	Status: 204 NO CONTENT |
+	-------------- |
+	

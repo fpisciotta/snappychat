@@ -279,3 +279,44 @@ exports.getChatHistory = function (query, callback) {
 		
 
 }
+
+exports.updateChatConversation = function (query, conditions,callback){
+	//console.log("User body: "+JSON.stringify(conditions));
+	Chat.findOne(query,function(err,chat){
+		
+		if(err)
+			return callback(err,null);
+		
+		if(chat == null)
+			return callback(new Error("Chat not found"),null );
+		
+		for (var key in conditions){
+			
+			if(key == 'email'){
+				return callback(new Error('Email property cannot be modified'), null)
+			}
+			//console.log("Conditions: "+JSON.stringify(conditions));
+			//console.log("key: "+key);
+			//console.log("User: "+JSON.stringify(user));
+			//console.log("User key: "+user[key]);
+			if(chat[key] != null){
+				console.log("Chat key exist");
+				chat[key] = conditions[key];
+			}else{
+				console.log("Chat key does not exist");
+				chat[key] = conditions[key];
+			}
+		}
+		
+		
+		chat.save(callback)
+	
+	});
+}
+
+exports.getChatConversation = function (req, callback){
+		//console.log("User id: ",req.params.user_id);
+		Chat.find(req).exec(function(err, chat) {
+            callback(err,chat);
+        });
+}
