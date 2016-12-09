@@ -270,7 +270,17 @@ router.route('/chats')
         
         
     });
-
+	
+router.route('/chats/:chat_id')
+.delete(function(req, res) {
+		response = res;
+		modelChat.removeChat({_id:req.param('chat_id')},function(err){
+			if (err)
+                res.status(500).send(err.message);
+			else
+				res.status(200).json({ message: 'User deleted' });
+		});
+    });
 	
 
 

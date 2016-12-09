@@ -57,6 +57,12 @@ exports.deleteChat = function (query, callback) {
 		
 }
 
+exports.removeChat = function (query,callback){
+	Chat.remove(query, function(err) {
+            callback(err);
+    });
+}
+
 var updateChat = function (query, callback) {
 	User.find({
 		'email': {$in : [query.user_sender_id,query.user_receiver_id]}
