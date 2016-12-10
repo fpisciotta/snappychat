@@ -14,6 +14,7 @@ var chatMessageSchema = new mongoose.Schema({
 	user_sender_id: {type: mongoose.Schema.Types.ObjectId, ref : 'User'},
 	user_receiver_id: {type: mongoose.Schema.Types.ObjectId, ref : 'User'},
 	message: {type : String, required : true},
+	type:{String},
 	creationDate: {type: Date, default: Date.now}
 });
 
