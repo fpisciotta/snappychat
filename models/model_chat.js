@@ -137,11 +137,11 @@ exports.createChatMessage = function (query, callback) {
 						if (chat == undefined || chat == null)
 							return callback(new Error("Chat not found"), null);
 						console.log("Chat created");
-						saveChatMessage(chat, users, query.message, callback);
+						saveChatMessage(chat, users, query.message, query.type, callback);
 					});
 				} else {
 					console.log("Chat found");
-					saveChatMessage(chat[0], [user_sender,user_receiver], query.message, callback);
+					saveChatMessage(chat[0], [user_sender,user_receiver], query.message, query.type, callback);
 				}
 
 			});
@@ -153,13 +153,14 @@ exports.createChatMessage = function (query, callback) {
 	});
 }
 
-var saveChatMessage = function (chat, users, message, callback) {
+var saveChatMessage = function (chat, users, message,type, callback) {
 
 	var new_chat_message = {
 		chat_id: chat._id,
 		user_sender_id: users[0]._id,
 		user_receiver_id: users[1]._id,
-		message: message
+		message: message,
+		type : type
 	}
 	console.log("New Chat message "+JSON.stringify(new_chat_message));
 	var chatMessage = new ChatMessage(new_chat_message);
