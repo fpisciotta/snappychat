@@ -37,10 +37,7 @@ var userSchema = new mongoose.Schema({
 var timelineSchema = new mongoose.Schema({
 	user_id : {type: mongoose.Schema.Types.ObjectId, ref : 'User'},
 	comment : {type : String, required : true},
-	images : [{
-	  name : { type: String},
-	  data : {type : String}
-    }],
+	images : [{type : String}],
 	creationDate: {type: Date, default: Date.now}
 });
 
