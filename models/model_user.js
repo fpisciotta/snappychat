@@ -270,18 +270,30 @@ exports.addTimeline = function (query, condition,callback){
 		
 		var new_comment = {user_id : user._id,
 						   comment: condition.comment,
-							messages : condition.messages
 		}
 		
-		//console.log("Condition: "+JSON.stringify(condition))	
-		console.log("New comment: "+JSON.stringify(new_comment))			
+		if(condition.images != null){
+			new_comment.images = []
+			for (var x in condition.images){
+				new_comment.images.push(condition.images[x]);
+			}
+		}
+		
+		
+		//if(condition.images != null){
+		//	new_comment.images = [];
+		//	new_comment.images.push(condition.images)
+		//}
+		
+		//console.log("Condition: "+JSON.stringify(condition.images))	
+		//console.log("New comment: "+JSON.stringify(new_comment))			
 		var timeline = new Timeline(new_comment);
 		
 		
 		timeline.save(function(err) {
 				if(err)
 					return callback(err,null);
-				
+				console.log("New comment: "+JSON.stringify(timeline))		
 				user.timeline.push(timeline);
 				user.save(callback);
 		});

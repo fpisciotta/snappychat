@@ -98,7 +98,7 @@ router.route('/users/:user_id')
 router.route('/users/:user_id/timeline')
 	.post(function(req, res) {
 		response = res;
-			modelUser.addTimeline({email:req.params.user_id},req.body,function(err,user){
+			modelUser.addTimeline({email:req.params.user_id},req.body,function(err,timeline){
 				if (err)
 					res.status(500).send(err.message);
 				else
