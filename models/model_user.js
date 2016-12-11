@@ -293,7 +293,7 @@ exports.addTimeline = function (query, condition,callback){
 		timeline.save(function(err) {
 				if(err)
 					return callback(err,null);
-				console.log("New comment: "+JSON.stringify(timeline))		
+				//console.log("New comment: "+JSON.stringify(timeline))		
 				user.timeline.push(timeline);
 				user.save(callback);
 		});
