@@ -267,12 +267,13 @@ exports.addTimeline = function (query, condition,callback){
 		if (user == undefined || user == null)
 			return callback(new Error("User not found"),null );
 			
+		
 		var new_comment = {user_id : user._id,
 						   comment: condition.comment,
 							messages : condition.messages
 		}
 		
-		
+		//console.log("Condition: "+JSON.stringify(condition))	
 		console.log("New comment: "+JSON.stringify(new_comment))			
 		var timeline = new Timeline(new_comment);
 		
