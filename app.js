@@ -13,7 +13,7 @@ process.on('uncaughtException', function (err) {
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
-app.use(bodyParser.json({limit: '50mb'})));
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(function (err, req, res, next) {
   console.error(err.stack)
