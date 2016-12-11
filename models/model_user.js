@@ -268,7 +268,8 @@ exports.addTimeline = function (query, condition,callback){
 			return callback(new Error("User not found"),null );
 			
 		var new_comment = {user_id : user._id,
-						   comment: condition.comment		
+						   comment: condition.comment,
+							messages : condition.messages
 		}
 		
 		
