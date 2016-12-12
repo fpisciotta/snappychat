@@ -90,7 +90,7 @@ exports.getUserProfileAndTimeline = function (req, callback){
 	console.log("User id: ",req.params.user_id);
 	User.find({'email': req.params.user_id}).select('-friends_requested -friends_pending -friends -image')
 	.populate({path: 'timeline',options: { sort: { 'creationDate': -1 } }} )
-	.populate({path: 'timeline.images', select : '_id'} )
+	//.populate({path: 'timeline.images', select : '_id data'} )
 	.exec(function(err, user) {
 		callback(err,user);
 	});
