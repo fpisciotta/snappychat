@@ -37,11 +37,15 @@ var userSchema = new mongoose.Schema({
 var timelineSchema = new mongoose.Schema({
 	user_id : {type: mongoose.Schema.Types.ObjectId, ref : 'User'},
 	comment : {type : String, required : true},
-	images : [{type : String}],
+	images : [{ type: Schema.Types.ObjectId, ref: 'Image' }],
 	creationDate: {type: Date, default: Date.now}
 });
 
-
-
+var imageSchema = new mongoose.Schema({
+	data : {type : String, required : true},
+	type : {type : String},
+	name : {type : String}
+});
+Image = mongoose.model('Image', imageSchema);
 exports.Timeline = mongoose.model('Timeline', timelineSchema);
 exports.User = mongoose.model('User', userSchema);
