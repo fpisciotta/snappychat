@@ -89,10 +89,11 @@ exports.getUserProfileAndFriendsPending = function (req, callback){
 exports.getUserProfileAndTimeline = function (req, callback){
 	console.log("User id: ",req.params.user_id);
 	User.find({'email': req.params.user_id}).select('-friends_requested -friends_pending -friends -image')
-	.populate({path: 'timeline',options: { sort: { 'creationDate': -1 } }} ).exec(function(err, user) {
+	.populate({path: 'timeline',options: { sort: { 'creationDate': -1 } }} )
+	.populate({path: 'timeline.images', select : '_id'} )
+	.exec(function(err, user) {
 		callback(err,user);
 	});
-	
 }
 
 exports.getUsers = function (query,callback){
