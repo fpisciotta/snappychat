@@ -96,6 +96,7 @@ exports.getUserProfileAndTimeline = function (req, callback){
 	});
 }
 
+
 exports.getUsers = function (query,callback){
 	if(JSON.stringify(query) != '{}'){
 		console.log("Query found");
