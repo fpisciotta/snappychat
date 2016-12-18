@@ -99,7 +99,7 @@ exports.getUserProfileAndTimeline = function (req, callback){
 exports.getUsers = function (query,callback){
 	if(JSON.stringify(query) != '{}'){
 		console.log("Query found");
-		User.find({visibility : {$in : ['public','friends-only']}}).or([{nick_name : new RegExp(query.search, 'i')}, {interests : new RegExp(query.search, 'i')}]).exec(function(err, users) {
+		User.find({visibility : {$in : ['public','friends-only']}, email : {$ne : query.email}}).or([{nick_name : new RegExp(query.search, 'i')}, {interests : new RegExp(query.search, 'i')}]).exec(function(err, users) {
 			callback(err,users)
 		});
 	}else{

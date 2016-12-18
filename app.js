@@ -45,6 +45,7 @@ router.route('/users')
 		response = res;
 		console.log("Get all users");
 		var query = {
+			email : req.param('email'),
 			search : req.param('search')
 		}
 		modelUser.getUsers(query,function(err,users){
