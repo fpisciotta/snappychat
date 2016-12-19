@@ -235,17 +235,16 @@ exports.removeFriendRequest = function (query,query_friend, callback){
 		if(err)
 			return callback(err,null);
 		
-		if (user_friend == undefined || user_friend == null)
-			return callback(new Error("User not found"),null );
-		
-		User.findOneAndUpdate(query,{$pull: {"friends_requested": {user_id : user_friend._id}}},function(err,user){
-			console.log("User: "+JSON.stringify(user));
+		User.findOneAndUpdate(query,{$pull: {"friends_requested": query_friend}},function(err,user){
+			//console.log("User: "+JSON.stringify(user));
 			if(err)
 				return callback(err,null);
 			
 			if (user == undefined || user == null)
 				return callback(new Error("User not found"),null );
 			
+			if(user_friend == undefined || user_friend == null)
+					return callback(null,"Friend not found");
 			
 			user_friend.update({$pull: {"friends_pending": {user_id : user._id}}},function(err,user){
 				callback(err,user);
