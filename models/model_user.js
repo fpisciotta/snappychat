@@ -148,7 +148,7 @@ exports.addFriend = function (query, query_friend,callback){
 				if (user == undefined || user == null)
 					return callback(new Error("User not found"),null );
 				
-				User.update({email:query_friend.email},{$pull: {"friends_requested": query}},function(err,user){
+				User.update({email:query_friend.email},{$pull: {"friends_requested": {user_id : query.email}}},function(err,user){
 					callback(err,user);
 				});
 			
