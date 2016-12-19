@@ -29,7 +29,7 @@ var userSchema = new mongoose.Schema({
 	message : {type : String},
 	creationDate: {type: Date, default: Date.now}}],
   friends_requested : [{
-	user_id : { type: Schema.Types.ObjectId, ref: 'User' },
+	user_id : { type: String},
 	message : {type : String},
 	creationDate: {type: Date, default: Date.now}}]
 }, { autoIndex: true });

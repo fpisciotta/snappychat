@@ -71,7 +71,7 @@ exports.getUserProfileAndFriends = function (req, callback){
 exports.getUserProfileAndFriendsRequest = function (req, callback){
 	//console.log("User id: ",req.params.user_id);
 	User.find({'email': req.params.user_id}).select('-friends_pending -friends -timeline -image')
-	.populate('friends_requested.user_id','-friends_requested -friends_pending -friends -timeline').exec(function(err, user) {
+	.exec(function(err, user) {
 		callback(err,user);
 	});
 	
@@ -188,7 +188,7 @@ exports.removeFriend = function (query,query_friend, callback){
 
 exports.addFriendRequest = function (query, query_friend,callback){
 	
-		var new_friend_requested = { email : query_friend.email,
+		var new_friend_requested = { user_id : query_friend.email,
 							message : query_friend.message
 						  };
 		
@@ -197,13 +197,6 @@ exports.addFriendRequest = function (query, query_friend,callback){
 				
 			if(err)
 				return callback(err,null);
-			
-			if (user_friend == undefined || user_friend == null)
-				return callback(new Error("User not found"),null );
-			
-			var new_friend_requested = { user_id : user_friend,
-							message : query_friend.message
-						  };
 						  
 			//User requesting friendship
 			User.findOneAndUpdate(query,{$push: {"friends_requested": new_friend_requested}},function(err,user){
@@ -213,6 +206,9 @@ exports.addFriendRequest = function (query, query_friend,callback){
 				
 				if (user == undefined || user == null)
 					return callback(new Error("User not found"),null );
+				
+				if(user_friend == undefined || user_friend == null)
+					return callback(null,"Friend not found");
 				
 				var friend_requesting =  { user_id : user,
 							message : query_friend.message
