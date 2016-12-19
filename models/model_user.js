@@ -133,7 +133,7 @@ exports.addFriend = function (query, query_friend,callback){
 					
 					user.update({
 						$push: {"friends": user_friend},
-						$pull: {"friends_requested": {user_id : user_friend._id}}
+						$pull: {"friends_requested": {user_id : user_friend.email}}
 					}).exec(function(err,user){
 						callback(err,user);
 					});
